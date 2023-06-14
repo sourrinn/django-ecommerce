@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block title %}Shopping Cart - E-Commerce Website{%
+endblock %} {% block content %}
+<section class="cart">
+  <h2>Your Shopping Cart</h2>
+  {% if cart_items %}
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td>
+          <img
+            src="{{ item.product.image.url }}"
+            alt="{{ item.product.name }}"
+          />
+          {{ item.product.name }}
+        </td>
+        <td>${{ item.product.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.subtotal }}</td>
+        <td>
+          <a href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="cart-summary">
+    <p>Total Items: {{ total_items }}</p>
+    <p>Total Amount: ${{ total_amount }}</p>
+    <a href="{% url 'checkout' %}">Proceed to Checkout</a>
+  </div>
+  {% else %}
+  <p>Your cart is empty.</p>
+  {% endif %}
+</section>
+{% endblock %}

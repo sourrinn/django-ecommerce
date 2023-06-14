@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block title %}Register - E-Commerce Website{%
+endblock %} {% block content %}
+<section class="register">
+  <h2>Register</h2>
+  <div class="register-form">
+    <form method="POST" action="{% url 'register' %}">
+      {% csrf_token %}
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <label for="confirm_password">Confirm Password:</label>
+      <input
+        type="password"
+        id="confirm_password"
+        name="confirm_password"
+        required
+      />
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}E-Commerce Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'product_list' %}">Products</a></li>
+          <!-- Add more navigation links as needed -->
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {% block content %}
+      <!-- Content of specific pages will be inserted here -->
+      {% endblock %}
+    </main>
+
+    <footer>
+      <p>&copy; 2023 Your E-Commerce Website. All rights reserved.</p>
+    </footer>
+
+    <!-- Add any necessary JavaScript files -->
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>

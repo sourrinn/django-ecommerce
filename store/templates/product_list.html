@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block title %} {% if category %} {{ category.name
+}} - Product List - E-Commerce Website {% else %} Search Results - E-Commerce
+Website {% endif %} {% endblock %} {% block content %}
+<section class="product-list">
+  <h2>
+    {% if category %} {{ category.name }} - Products {% else %} Search Results
+    {% endif %}
+  </h2>
+  <div class="product-grid">
+    {% if products %} {% for product in products %}
+    <div class="product-card">
+      <a href="{% url 'product_detail' product.id %}">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+        <h3>{{ product.name }}</h3>
+      </a>
+      <p class="price">${{ product.price }}</p>
+    </div>
+    {% endfor %} {% else %}
+    <p>No products found.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

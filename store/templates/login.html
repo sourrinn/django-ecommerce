@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block title %}Login - E-Commerce Website{% endblock
+%} {% block content %}
+<section class="login">
+  <h2>Login</h2>
+  <div class="login-form">
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    <p>
+      Forgot your password?
+      <a href="{% url 'password_reset' %}">Reset Password</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

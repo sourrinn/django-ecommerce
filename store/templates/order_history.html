@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %}Order Confirmation - E-Commerce
+Website{% endblock %} {% block content %}
+<section class="order-confirmation">
+  <h2>Order Confirmation</h2>
+  <div class="order-details">
+    <h3>Thank you for your order!</h3>
+    <p>Your order has been successfully placed.</p>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Order Date: {{ order.order_date }}</p>
+    <p>Shipping Address: {{ order.shipping_address }}</p>
+    <p>Total Amount: ${{ order.total_price }}</p>
+  </div>
+</section>
+{% endblock %}

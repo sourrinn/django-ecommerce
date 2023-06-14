@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %}Home - E-Commerce Website{% endblock
+%} {% block content %}
+<section class="hero">
+  <h1>Welcome to our E-Commerce Website!</h1>
+  <p>Discover a wide range of products at great prices.</p>
+</section>
+
+<section class="featured-products">
+  <h2>Featured Products</h2>
+  <div class="product-list">
+    {% for product in featured_products %}
+    <div class="product-card">
+      <a href="{% url 'product_detail' product.id %}">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+        <h3>{{ product.name }}</h3>
+      </a>
+      <p class="price">${{ product.price }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="categories">
+  <h2>Product Categories</h2>
+  <div class="category-list">
+    {% for category in categories %}
+    <div class="category-card">
+      <a href="{% url 'product_list' category.slug %}">
+        <img src="{{ category.image.url }}" alt="{{ category.name }}" />
+        <h3>{{ category.name }}</h3>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
