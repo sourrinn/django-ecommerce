@@ -9,9 +9,13 @@ def update_product_stock(sender, instance, created, **kwargs):
     Signal handler to update product stock after a product is saved or updated.
     """
     if not created and instance.stock_changed:
+        old_stock = instance.get_old_value('stock')
+        new_stock = instance.stock
+        stock_difference = new_stock - old_stock
+
         # Perform actions when an existing product's stock is updated
         # For example, you can update the stock quantity based on changes in the product instance
-        pass
+        instance.update_inventory(stock_difference)
 
 
 @receiver(post_save, sender=Order)
@@ -22,7 +26,7 @@ def update_order_total(sender, instance, created, **kwargs):
     if not created and instance.items_changed:
         # Perform actions when an existing order's items are updated
         # For example, you can recalculate the total price based on changes in the order items
-        pass
+        instance.calculate_total_price()
 
 
 @receiver(pre_delete, sender=Order)
@@ -32,7 +36,7 @@ def release_order_products(sender, instance, **kwargs):
     """
     # Perform actions before deleting an order
     # For example, you can release the products by updating their availability or stock
-    pass
+    instance.release_products()
 
 
 @receiver(post_save, sender=User)
@@ -43,11 +47,11 @@ def update_user_profile(sender, instance, created, **kwargs):
     if created:
         # Perform actions when a new user is created
         # For example, you can create a user profile
-        pass
+        instance.create_profile()
     else:
         # Perform actions when an existing user is updated
         # For example, you can update the user profile information
-        pass
+        instance.update_profile()
 
 
 @receiver(post_save, sender=Category)
@@ -57,7 +61,7 @@ def update_category_products_count(sender, instance, created, **kwargs):
     """
     # Perform actions after a product is saved, updated, or deleted
     # For example, you can update the count of products in the category
-    pass
+    instance.update_product_count()
 
 
 @receiver(post_save, sender=Coupon)
@@ -68,11 +72,11 @@ def apply_coupon_to_order(sender, instance, created, **kwargs):
     if created:
         # Perform actions when a new coupon is created
         # For example, you can apply the coupon to eligible orders
-        pass
+        instance.apply_to_eligible_orders()
     else:
         # Perform actions when an existing coupon is updated
         # For example, you can reapply the coupon to eligible orders
-        pass
+        instance.reapply_to_eligible_orders()
 
 
 # Add more signal handlers as needed
