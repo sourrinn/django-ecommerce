@@ -4,6 +4,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
+def view_home(request):
+    product = get_object_or_404(Product)
+    category = get_object_or_404(Category)
+    context = {
+        'product': product,
+        'category': category
+    }
+    return render(request, 'home.html', context)
+
+
 @login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
